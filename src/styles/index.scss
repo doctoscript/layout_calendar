@@ -1,7 +1,7 @@
 $cell-size: 100px;
 $padding-size: 10px;
 $gap: 1px;
-$line-size: calc($cell-size * 7 + $padding-size * 2 + $gap * 6);
+$line-size: $cell-size * 7 + $padding-size * 2 + $gap * 6;
 $start-day: (
   'mon': 0,
   'tue': 1,
@@ -38,6 +38,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.5s;
+    user-select: none;
 
     @for $number from 1 through 31 {
       &:nth-child(#{$number})::before {
@@ -51,13 +53,12 @@ body {
       cursor: pointer;
       background-color: #ffbfcb;
       transform: translateY(-20px);
-      transition: transform 0.5s;
     }
   }
 }
 
 @each $day, $numb in $start-day {
-  .calendar--start-day-#{$day} :first-child {
+  .calendar--start-day-#{$day} > :first-child {
     margin-left: $numb * ($cell-size + $gap);
   }
 }
